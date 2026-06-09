@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typography Resume</title>
+  <link rel="stylesheet" href="style.css?v=48">
+</head>
+
+<body>
+  <div class="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <div id="custom-cursor"><img src="Group 5.png" alt=""></div>
+  <style>
+    #custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 40px;
+      pointer-events: none;
+      z-index: 99999;
+      will-change: transform;
+    }
+
+    #custom-cursor img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transform: rotate(20deg);
+    }
+
+    .insta-link {
+      color: inherit;
+      text-decoration: none;
+      display: inline-block;
+      border-bottom: 5px solid #000;
+      padding-bottom: 2px;
+      transition: opacity 0.2s ease;
+    }
+
+    .insta-link:hover {
+      opacity: 0.7;
+    }
+
+    /* ── Project Modal ── */
+    .proj-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .proj-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .proj-modal {
+      background: #fff;
+      border: 1.5px solid #000;
+      border-radius: 0;
+      padding: 50px 52px 52px;
+      width: min(560px, 90vw);
+      position: relative;
+      transform: translateY(30px) scale(0.96);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+      opacity: 0;
+    }
+
+    .proj-overlay.open .proj-modal {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .proj-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      line-height: 1;
+    }
+
+    .proj-close:hover {
+      color: #fff;
+    }
+
+    .proj-modal-label {
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      color: rgba(255, 255, 255, 0.35);
+      margin: 0 0 8px;
+    }
+
+    .proj-modal-header {
+      margin-bottom: 20px;
+    }
+
+    .proj-modal-num {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #000;
+      line-height: 1;
+    }
+
+    .proj-modal-title {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #000;
+      margin: 0 0 36px;
+    }
+
+    .proj-sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @keyframes cardFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .proj-sub-item {
+      border: 1.5px solid #000;
+      border-radius: 0;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    .proj-sub-item.visible {
+      animation: cardFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .proj-sub-item.visible:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .proj-sub-item.visible:nth-child(2) {
+      animation-delay: 0.12s;
+    }
+
+    .proj-sub-item.visible:nth-child(3) {
+      animation-delay: 0.19s;
+    }
+
+    .proj-sub-item.visible:nth-child(4) {
+      animation-delay: 0.26s;
+    }
+
+    .proj-sub-item:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    .proj-sub-img {
+      width: 100%;
+      height: 180px;
+      background: #ebebeb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1.5px solid #000;
+    }
+
+    .proj-sub-img span {
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      color: rgba(0, 0, 0, 0.25);
+    }
+
+    .proj-sub-info {
+      padding: 16px 18px 18px;
+    }
+
+    .proj-sub-num {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: rgba(0, 0, 0, 0.35);
+      margin-bottom: 10px;
+    }
+
+    .proj-sub-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #000;
+      letter-spacing: 0.5px;
+    }
+
+    .proj-sub-desc {
+      font-size: 0.72rem;
+      color: rgba(0, 0, 0, 0.45);
+      margin-top: 4px;
+    }
+
+    /* ── Scroll Reveal ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-up.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+
+  <img src="1.png" alt="" class="flower flower1">
+  <img src="2.png" alt="" class="flower flower2">
+  <img src="3.png" alt="" class="flower flower3">
+  <img src="4.png" alt="" class="flower flower4">
+  <img src="5.png" alt="" class="flower flower5">
+
+  <header class="hero">
+    <div class="profile-wrap">
+      <img src="profile.jpg" alt="">
+    </div>
+
+    <div class="hero-text">
+      <p class="small-title">HELLO!</p>
+      <h1>LEE<br>YOONJIN*</h1>
+    </div>
+  </header>
+
+  <section class="section personality">
+    <div class="left">
+      <div style="font-weight: 900; font-size: 2.2rem; margin-bottom: 25px; letter-spacing: 2px;">ABOUT ME</div>
+      <h2>01*</h2>
+      <p class="section-name">PERSONALITY</p>
+
+      <div class="description">
+        취향과 트렌드를 이해하고,<br>
+        꽃을 다루며 배운 섬세함을 디자인에 담는<br>
+        UI/UX 디자이너
+      </div>
+    </div>
+
+    <div class="right">
+      <div
+        style="font-weight: 900; font-size: 2.2rem; margin-bottom: 25px; letter-spacing: 2px; visibility: hidden; select: none;">
+        SPACER</div>
+      <h2 class="big-right">INFP!</h2>
+
+      <div class="group-img-wrap">
+        <img src="Group 3.png" alt="INFP traits diagram" class="group-img">
+      </div>
+    </div>
+  </section>
+
+  <section class="section education-section">
+    <div class="left">
+      <h2>02*</h2>
+      <p class="section-name">EDUCATION</p>
+    </div>
+    <div class="right-content">
+      <div class="edu-item">
+        <span class="bullet">•</span>
+        <div>
+          <h3>유성생명과학고<br>스마트원예화훼장식과 졸업*</h3>
+          <p>2026.01</p>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <span class="bullet">•</span>
+        <div>
+          <h3>[NCS산대특] AI 바이브코딩<br>웹비즈니스구축및 마케팅실정과정 수료*</h3>
+          <p>2026.06</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section certificates">
+    <div class="left">
+      <h2>03*</h2>
+      <p class="section-name">CERTIFICATES</p>
+    </div>
+
+    <div class="cert-list">
+      <div class="cert-item lazy-item">
+        <span>01</span>
+        <div>
+          <h3>화훼장식기능사*</h3>
+          <p>2024.09.12</p>
+        </div>
+      </div>
+
+      <div class="cert-item lazy-item">
+        <span>02</span>
+        <div>
+          <h3>워드프로세서*</h3>
+          <p>2025.03.18</p>
+        </div>
+      </div>
+
+      <div class="cert-item lazy-item">
+        <span>03</span>
+        <div>
+          <h3>조경기능사*</h3>
+          <p>2025.07.25</p>
+        </div>
+      </div>
+
+      <div class="cert-item lazy-item">
+        <span>04</span>
+        <div>
+          <h3>ITQ 한글*</h3>
+          <p>2025.09.12</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  </section>
+
+
+  <section class="section skills-section">
+    <div class="left">
+      <h2>04*</h2>
+      <p class="section-name">SKILLS</p>
+    </div>
+    <div class="right-content" style="width: 60%;">
+
+      <h3 class="skill-category">AI COMMUNICATION & DESIGN</h3>
+      <div class="skill" style="transition-delay: 0s;">
+        <label>Claude code</label>
+        <div class="bar">
+          <div class="fill" style="width: 65%;"></div>
+        </div>
+      </div>
+      <div class="skill" style="transition-delay: 0.15s;">
+        <label>GEMINI / Chat GPT</label>
+        <div class="bar">
+          <div class="fill" style="width: 80%;"></div>
+        </div>
+      </div>
+      <div class="skill" style="transition-delay: 0.3s;">
+        <label>PHOTOSHOP</label>
+        <div class="bar">
+          <div class="fill" style="width: 60%;"></div>
+        </div>
+      </div>
+      <div class="skill" style="transition-delay: 0.45s;">
+        <label>Figma</label>
+        <div class="bar">
+          <div class="fill" style="width: 80%;"></div>
+        </div>
+      </div>
+
+      <h3 class="skill-category" style="margin-top: 50px;">WEB DEVELOPMENT</h3>
+      <div class="skill" style="transition-delay: 0s;">
+        <label>HTML</label>
+        <div class="bar">
+          <div class="fill" style="width: 75%;"></div>
+        </div>
+      </div>
+      <div class="skill" style="transition-delay: 0.15s;">
+        <label>FIREBASE</label>
+        <div class="bar">
+          <div class="fill" style="width: 55%;"></div>
+        </div>
+      </div>
+      <div class="skill" style="transition-delay: 0.3s;">
+        <label>CSS</label>
+        <div class="bar">
+          <div class="fill" style="width: 70%;"></div>
+        </div>
+      </div>
+      <div class="skill" style="transition-delay: 0.45s;">
+        <label>Javascript</label>
+        <div class="bar">
+          <div class="fill" style="width: 50%;"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section projects-section">
+    <div class="left">
+      <h2>05*</h2>
+      <p class="section-name">PROJECTS</p>
+    </div>
+    <div class="right-content" style="width: 60%;">
+      <div class="project-grid">
+
+        <a class="project-card" href="javascript:void(0)" id="project-minimedi" data-project="minimedi">
+          <div class="project-card-img">
+            <img src="minimedi_thumbnail.png" alt="minimedi" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <div class="project-card-info">
+            <h3>minimedi</h3>
+          </div>
+        </a>
+
+        <a class="project-card" href="javascript:void(0)" id="project-ace" data-project="7000rpm">
+          <div class="project-card-img">
+            <img src="7000rpm_thumbnail.png" alt="7000rpm." style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <div class="project-card-info">
+            <h3>7000rpm.</h3>
+          </div>
+        </a>
+
+        <a class="project-card" href="javascript:void(0)" id="project-science" data-project="renewal">
+          <div class="project-card-img">
+            <img src="renewal_thumbnail.png" alt="노후홈페이지 리뉴얼" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <div class="project-card-info">
+            <h3>노후홈페이지<br>리뉴얼</h3>
+          </div>
+        </a>
+
+        <a class="project-card" href="javascript:void(0)" id="project-card-news" data-project="design">
+          <div class="project-card-img">
+            <img src="design_thumbnail.png" alt="디자인" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <div class="project-card-info">
+            <h3>디자인</h3>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-section">
+    <div class="left">
+      <h2>06*</h2>
+      <p class="section-name">CONTACT</p>
+    </div>
+    <div class="right-content" style="width: 60%;">
+      <div class="contact-box">
+        <h3>EMAIL</h3>
+        <p>leeyoonjin127@gmail.com</p>
+      </div>
+      <div class="contact-box">
+        <h3>PHONE</h3>
+        <p>010-4396-5840</p>
+      </div>
+      <div class="contact-box">
+        <h3>INSTAGRAM</h3>
+        <p><a href="https://www.instagram.com/yznie.design/" target="_blank" class="insta-link">@yznie.design</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Sub-Menu Modal -->
+  <div id="project-modal-overlay" class="proj-overlay">
+    <div id="project-modal" class="proj-modal">
+      <div class="proj-modal-header">
+        <div id="proj-modal-num" class="proj-modal-num"></div>
+      </div>
+      <h2 id="proj-modal-title" class="proj-modal-title"></h2>
+      <div id="proj-sub-grid" class="proj-sub-grid"></div>
+    </div>
+  </div>
+
+  <footer>
+    <h2>THANK<br>YOU*</h2>
+    <p>copyrightⒸ <br>LEE yoonjin <br>
+      all rights reserved.
+    </p>
+  </footer>
+
+  <script>
+    // Progress Bar
+    const bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const total = document.body.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / total) * 100;
+      bar.style.width = progress + '%';
+    });
+
+    // ── Scroll Reveal ──
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+
+    // 화면 아래에 있는 섹션/요소만 fade-up 적용
+    const revealTargets = [];
+    document.querySelectorAll('.section, footer').forEach(el => {
+      if (el.classList.contains('skills-section')) {
+        // SKILLS 섹션은 하위 요소들을 개별 애니메이션 타겟으로 설정
+        const leftCol = el.querySelector('.left');
+        if (leftCol) revealTargets.push(leftCol);
+        
+        el.querySelectorAll('.skill-category, .skill').forEach(child => {
+          revealTargets.push(child);
+        });
+      } else {
+        revealTargets.push(el);
+      }
+    });
+
+    revealTargets.forEach(el => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top >= window.innerHeight * 0.85) {
+        el.classList.add('fade-up');
+        scrollObserver.observe(el);
+      }
+    });
+
+
+    // Flower rotation on scroll
+    const flowers = document.querySelectorAll('.flower');
+    const flowerAngles = Array(flowers.length).fill(0);
+    let lastScrollY = window.scrollY;
+    let scrollTimer = null;
+    let isScrolling = false;
+    let animFrame = null;
+
+    function rotateFLowers() {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+      lastScrollY = currentScrollY;
+
+      flowers.forEach((flower, i) => {
+        // Alternate direction per flower for variety
+        const dir = i % 2 === 0 ? 1 : -1;
+        flowerAngles[i] += delta * dir * 0.8;
+        flower.style.transform = `rotate(${flowerAngles[i]}deg)`;
+      });
+
+      if (isScrolling) {
+        animFrame = requestAnimationFrame(rotateFLowers);
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!isScrolling) {
+        isScrolling = true;
+        animFrame = requestAnimationFrame(rotateFLowers);
+      }
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        isScrolling = false;
+        cancelAnimationFrame(animFrame);
+      }, 120);
+    });
+
+    // Custom cursor follow mouse
+    const customCursor = document.getElementById('custom-cursor');
+    document.addEventListener('mousemove', (e) => {
+      customCursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+
+    // ── Project Modal ──
+    const projectData = {
+      minimedi: {
+        num: '01*',
+        title: 'minimedi',
+        items: [
+          { name: 'minimedi',              img: 'minimedi_card1.png',    href: 'https://minimedi.vercel.app/' },
+          { name: '앱 소개페이지',         img: 'minimedi_card2.png',    href: 'https://yoonjin070201.github.io/minimedi_app/' },
+          { name: 'minimedi<br>노트폴리오',   img: 'minimedi_card3.png',    href: 'https://notefolio.net/yznie/461357' },
+        ]
+      },
+      '7000rpm': {
+        num: '02*',
+        title: '7000rpm.',
+        items: [
+          { name: '7000rpm.',              img: '7000rpm_card1.png',   href: 'https://7000rpm9.vercel.app' },
+          { name: '7000rpm.<br>노트폴리오', img: '7000rpm_card2.png',   href: 'https://notefolio.net/yznie/461358' },
+        ]
+      },
+      renewal: {
+        num: '03*',
+        title: '노후홈페이지 리뉴얼',
+        items: [
+          { name: '국립과천과학관<br>리뉴얼홈페이지', img: 'renewal_card1.png',      href: 'https://gwacheon-national-science-museum-976337796405.us-west1.run.app' },
+        ]
+      },
+      design: {
+        num: '04*',
+        title: '디자인',
+        items: [
+          { name: '7000rpm.',  img: 'design_card1.png',  href: 'https://notefolio.net/yznie/461358' },
+          { name: 'minimedi',  img: 'design_card2.png',  href: 'https://notefolio.net/yznie/461357' },
+          { name: 'SENNOK',   img: 'design_card3.png',   href: 'https://notefolio.net/yznie/461626' },
+          { name: 'NAMING.',  img: 'design_card4.png',   href: 'https://notefolio.net/yznie/461476' },
+        ]
+      }
+    };
+
+    const overlay = document.getElementById('project-modal-overlay');
+    const modalTitle = document.getElementById('proj-modal-title');
+    const modalNum   = document.getElementById('proj-modal-num');
+    const subGrid    = document.getElementById('proj-sub-grid');
+
+    function openModal(projectKey) {
+      const data = projectData[projectKey];
+      if (!data) return;
+
+      modalNum.textContent   = data.num;
+      modalTitle.textContent = data.title;
+      subGrid.innerHTML = data.items.map(item => `
+        <a class="proj-sub-item" href="${item.href}" ${item.href !== '#' ? 'target="_blank"' : ''}>
+          <div class="proj-sub-img">
+            ${item.img
+              ? `<img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;display:block;">`
+              : '<span>IMAGE</span>'}
+          </div>
+          <div class="proj-sub-info">
+            <div class="proj-sub-name">${item.name}</div>
+          </div>
+        </a>
+      `).join('');
+
+      // 항목 수에 따라 그리드 열 수 조정 및 모달 전체 너비 조절 (카드의 실제 크기가 동일하게 유지되도록)
+      const len = data.items.length;
+      const cols = len === 1 ? 1 : len === 2 ? 2 : len === 3 ? 3 : 2;
+      subGrid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+      
+      const modalEl = document.getElementById('project-modal');
+      const targetWidth = cols === 1 ? 325 : cols === 3 ? 795 : 560;
+      modalEl.style.width = '100%';
+      modalEl.style.maxWidth = `min(${targetWidth}px, 90vw)`;
+
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      // staggered lazy-load 효과
+      requestAnimationFrame(() => {
+        subGrid.querySelectorAll('.proj-sub-item').forEach(el => {
+          el.classList.add('visible');
+        });
+      });
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.project-card[data-project]').forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(card.dataset.project);
+      });
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+  </script>
+</body>
+
+</html>

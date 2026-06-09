@@ -1,0 +1,618 @@
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none !important;
+}
+
+a, button, label, input, select, textarea {
+  cursor: none !important;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  background: #f5f3ef;
+  color: #000;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+section,
+header,
+footer {
+  padding: 120px max(6vw, calc((100vw - 1100px) / 2));
+  position: relative;
+  transition: padding 0.3s ease;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+}
+
+.profile-wrap img {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hero-text h1 {
+  font-size: 9rem;
+  line-height: 0.9;
+  font-weight: 900;
+}
+
+.small-title {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.birth {
+  margin-top: 15px;
+  font-size: 1.1rem;
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.personality {
+  margin-top: 100px;
+}
+
+.left h2,
+.right-title h2,
+.education h2,
+.skills h2 {
+  font-size: 7rem;
+  font-weight: 900;
+}
+
+.big-right {
+  font-size: 4.5rem;
+  font-weight: 900;
+  text-align: right;
+}
+
+.section-name {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.description {
+  margin-top: 60px;
+  font-size: 2rem;
+  line-height: 1.6;
+}
+
+.group-img-wrap {
+  width: 220px;
+  height: 220px;
+  margin-top: 65px;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.group-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cert-list {
+  width: 60%;
+}
+
+.certificates,
+.education-section {
+  align-items: flex-start;
+}
+
+.certificates .left,
+.education-section .left {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.certificates .left h2,
+.education-section .left h2 {
+  line-height: 0.9;
+}
+
+.certificates .cert-list,
+.education-section .right-content {
+  flex: 6;
+}
+
+.cert-item {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 50px;
+  align-items: flex-start;
+}
+
+.cert-item span {
+  font-size: 1.2rem;
+  width: 40px;
+}
+
+.cert-item h3 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.hobbies {
+  flex-direction: column;
+}
+
+.right-title {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.hobby-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 80px;
+  gap: 40px;
+}
+
+.hobby {
+  text-align: center;
+  font-size: 4rem;
+  cursor: pointer;
+  padding: 30px 20px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.hobby:hover {
+  transform: translateY(-10px);
+}
+
+.hobby.active {
+  background: #fff;
+  box-shadow: 0 0 30px rgba(255, 212, 59, 0.8);
+  /* Glowing effect */
+  transform: scale(1.05);
+}
+
+.hobby p {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  font-weight: 700;
+}
+
+.click-hint {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: #ff8ad6;
+  margin-top: 15px;
+  animation: bounceHint 1.5s infinite ease-in-out;
+}
+
+@keyframes bounceHint {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* Hobby Details Section */
+.hobby-details {
+  margin-top: 60px;
+  width: 100%;
+  display: none;
+}
+
+.hobby-details.show {
+  display: block;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hobby-category {
+  display: none;
+  gap: 40px;
+  justify-content: center;
+}
+
+.hobby-category.active-cat {
+  display: flex;
+}
+
+.hobby-card {
+  width: 400px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.hobby-card:hover {
+  transform: translateY(-5px);
+}
+
+.hobby-card .img-placeholder {
+  width: 100%;
+  height: 450px;
+  background: #e9ecef;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #adb5bd;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.hobby-card img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  display: block;
+}
+
+.hobby-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #212529;
+}
+
+.hobby-card p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #495057;
+}
+
+.contact-box {
+  margin-top: 50px;
+}
+
+.contact-box:first-child {
+  margin-top: 0;
+}
+
+.contact-box h3 {
+  font-size: 1.5rem;
+  color: #2ca25f;
+  margin-bottom: 5px;
+}
+
+.contact-box p {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.insta-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 5px solid #000;
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.insta-link:hover {
+  opacity: 0.7;
+}
+
+.edu-item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 50px;
+  align-items: flex-start;
+}
+
+.edu-item:last-child {
+  margin-bottom: 0;
+}
+
+.edu-item .bullet {
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.edu-item > div {
+  flex: 1;
+}
+
+.edu-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.skill-category {
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.skill {
+  margin-top: 35px;
+}
+
+.skill label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.bar {
+  width: 100%;
+  height: 18px;
+  background: #ddd;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #000;
+}
+
+.w60 {
+  width: 60%;
+}
+
+.w70 {
+  width: 70%;
+}
+
+.w75 {
+  width: 75%;
+}
+
+.w80 {
+  width: 80%;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.projects-section {
+  flex-direction: column;
+}
+
+.projects-section .right-content {
+  width: 100% !important;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 0;
+  border: 3px solid transparent;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  border: 3px solid #000;
+  box-shadow: none;
+}
+
+.project-card-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #adb5bd;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.project-card-info {
+  padding: 20px 22px 24px;
+}
+
+.project-card-info h3 {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+  color: #212529;
+}
+
+.project-card-info p {
+  font-size: 1rem;
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+footer {
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+footer h2 {
+  font-size: 6rem;
+  font-weight: 900;
+  line-height: 0.9;
+}
+
+footer p {
+  font-size: 2rem;
+}
+
+.flower {
+  position: fixed;
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: contain;
+  opacity: 0.95;
+  z-index: -1;
+}
+
+.flower1 {
+  top: 22%;
+  left: calc(50% + 190px);
+}
+
+.flower2 {
+  top: 36%;
+  left: calc(50% + 260px);
+}
+
+.flower3 {
+  top: 62%;
+  left: calc(50% - 390px);
+}
+
+.flower4 {
+  top: 75%;
+  left: calc(50% + 290px);
+}
+
+.flower5 {
+  top: 16%;
+  left: calc(50% - 310px);
+}
+
+@media(max-width:900px) {
+
+  section,
+  header,
+  footer {
+    padding: 80px 7vw !important;
+  }
+
+  .flower {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .flower1 { top: 5%; left: 80%; }
+  .flower2 { top: 32%; left: 85%; }
+  .flower3 { top: 60%; left: 8%; }
+  .flower4 { top: 80%; left: 82%; }
+  .flower5 { top: 18%; left: 4%; }
+
+  .hero,
+  .section,
+  footer {
+    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+  .right-content {
+    width: 100% !important;
+  }
+
+  .hero-text h1 {
+    font-size: 5rem;
+  }
+
+  .left h2,
+  .big-right,
+  .right-title h2,
+  .education h2,
+  .skills h2 {
+    font-size: 4rem;
+  }
+
+  .hobby-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hobby-category.active-cat {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hobby-card {
+    width: 100%;
+  }
+
+  .hexagon-box,
+  .group-img-wrap {
+    width: 100%;
+    height: auto;
+  }
+
+  .cert-list {
+    width: 100%;
+  }
+
+  .certificates .left,
+  .education-section .left {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  footer h2 {
+    font-size: 4rem;
+  }
+
+  footer p {
+    font-size: 1.4rem;
+  }
+
+}
+
+/* Lazy Loading Styles — sr-item 방식으로 통합됨 */
+
+/* Progress Bar Styles */
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: #eee;
+  z-index: 9999;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #000;
+  transition: width 0.1s;
+}
