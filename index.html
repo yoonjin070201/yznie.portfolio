@@ -277,13 +277,21 @@
   <section class="section education-section">
     <div class="left">
       <h2>02*</h2>
-      <p class="section-name"></p>
+      <p class="section-name">EDUCATION</p>
     </div>
     <div class="right-content">
       <div class="edu-item">
         <span class="bullet">•</span>
         <div>
-          <h3>[NCS산대특] AI 바이브코딩<br>웹비즈니스구축및 마케팅실정과정 수료*</h3>
+          <h3>유성생명과학고<br>스마트원예화훼장식과 졸업*</h3>
+          <p>2026.01</p>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <span class="bullet">•</span>
+        <div>
+          <h3>[NCS산대특] AI 바이브코딩<br>웹비즈니스 구축 및 마케팅실전과정 수료*</h3>
           <p>2026.06</p>
         </div>
       </div>
@@ -405,7 +413,8 @@
 
         <a class="project-card" href="javascript:void(0)" id="project-minimedi" data-project="minimedi">
           <div class="project-card-img">
-            <img src="minimedi_thumbnail.png" alt="minimedi" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <img src="minimedi_thumbnail.png" alt="minimedi"
+              style="width: 100%; height: 100%; object-fit: cover; display: block;">
           </div>
           <div class="project-card-info">
             <h3>minimedi</h3>
@@ -414,7 +423,8 @@
 
         <a class="project-card" href="javascript:void(0)" id="project-ace" data-project="7000rpm">
           <div class="project-card-img">
-            <img src="7000rpm_thumbnail.png" alt="7000rpm." style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <img src="7000rpm_thumbnail.png" alt="7000rpm."
+              style="width: 100%; height: 100%; object-fit: cover; display: block;">
           </div>
           <div class="project-card-info">
             <h3>7000rpm.</h3>
@@ -423,7 +433,8 @@
 
         <a class="project-card" href="javascript:void(0)" id="project-science" data-project="renewal">
           <div class="project-card-img">
-            <img src="renewal_thumbnail.png" alt="노후홈페이지 리뉴얼" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <img src="renewal_thumbnail.png" alt="노후홈페이지 리뉴얼"
+              style="width: 100%; height: 100%; object-fit: cover; display: block;">
           </div>
           <div class="project-card-info">
             <h3>노후홈페이지<br>리뉴얼</h3>
@@ -432,7 +443,8 @@
 
         <a class="project-card" href="javascript:void(0)" id="project-card-news" data-project="design">
           <div class="project-card-img">
-            <img src="design_thumbnail.png" alt="디자인" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <img src="design_thumbnail.png" alt="디자인"
+              style="width: 100%; height: 100%; object-fit: cover; display: block;">
           </div>
           <div class="project-card-info">
             <h3>디자인</h3>
@@ -516,7 +528,7 @@
         // SKILLS 섹션은 하위 요소들을 개별 애니메이션 타겟으로 설정
         const leftCol = el.querySelector('.left');
         if (leftCol) revealTargets.push(leftCol);
-        
+
         el.querySelectorAll('.skill-category, .skill').forEach(child => {
           revealTargets.push(child);
         });
@@ -584,55 +596,55 @@
         num: '01*',
         title: 'minimedi',
         items: [
-          { name: 'minimedi',              img: 'minimedi_card1.png',    href: 'https://minimedi.vercel.app/' },
-          { name: '앱 소개페이지',         img: 'minimedi_card2.png',    href: 'https://yoonjin070201.github.io/minimedi_app/' },
-          { name: 'minimedi<br>노트폴리오',   img: 'minimedi_card3.png',    href: 'https://notefolio.net/yznie/461357' },
+          { name: 'minimedi', img: 'minimedi_card1.png', href: 'https://minimedi.vercel.app/' },
+          { name: '앱 소개페이지', img: 'minimedi_card2.png', href: 'https://yoonjin070201.github.io/minimedi_app/' },
+          { name: 'minimedi<br>노트폴리오', img: 'minimedi_card3.png', href: 'https://notefolio.net/yznie/461357' },
         ]
       },
       '7000rpm': {
         num: '02*',
         title: '7000rpm.',
         items: [
-          { name: '7000rpm.',              img: '7000rpm_card1.png',   href: 'https://7000rpm9.vercel.app' },
-          { name: '7000rpm.<br>노트폴리오', img: '7000rpm_card2.png',   href: 'https://notefolio.net/yznie/461358' },
+          { name: '7000rpm.', img: '7000rpm_card1.png', href: 'https://7000rpm9.vercel.app' },
+          { name: '7000rpm.<br>노트폴리오', img: '7000rpm_card2.png', href: 'https://notefolio.net/yznie/461358' },
         ]
       },
       renewal: {
         num: '03*',
         title: '노후홈페이지 리뉴얼',
         items: [
-          { name: '국립과천과학관<br>리뉴얼홈페이지', img: 'renewal_card1.png',      href: 'https://gwacheon-national-science-museum-976337796405.us-west1.run.app' },
+          { name: '국립과천과학관<br>리뉴얼홈페이지', img: 'renewal_card1.png', href: 'https://gwacheon-national-science-museum-976337796405.us-west1.run.app' },
         ]
       },
       design: {
         num: '04*',
         title: '디자인',
         items: [
-          { name: '7000rpm.',  img: 'design_card1.png',  href: 'https://notefolio.net/yznie/461358' },
-          { name: 'minimedi',  img: 'design_card2.png',  href: 'https://notefolio.net/yznie/461357' },
-          { name: 'SENNOK',   img: 'design_card3.png',   href: 'https://notefolio.net/yznie/461626' },
-          { name: 'NAMING.',  img: 'design_card4.png',   href: 'https://notefolio.net/yznie/461476' },
+          { name: '7000rpm.', img: 'design_card1.png', href: 'https://notefolio.net/yznie/461358' },
+          { name: 'minimedi', img: 'design_card2.png', href: 'https://notefolio.net/yznie/461357' },
+          { name: 'SENNOK', img: 'design_card3.png', href: 'https://notefolio.net/yznie/461626' },
+          { name: 'NAMING.', img: 'design_card4.png', href: 'https://notefolio.net/yznie/461476' },
         ]
       }
     };
 
     const overlay = document.getElementById('project-modal-overlay');
     const modalTitle = document.getElementById('proj-modal-title');
-    const modalNum   = document.getElementById('proj-modal-num');
-    const subGrid    = document.getElementById('proj-sub-grid');
+    const modalNum = document.getElementById('proj-modal-num');
+    const subGrid = document.getElementById('proj-sub-grid');
 
     function openModal(projectKey) {
       const data = projectData[projectKey];
       if (!data) return;
 
-      modalNum.textContent   = data.num;
+      modalNum.textContent = data.num;
       modalTitle.textContent = data.title;
       subGrid.innerHTML = data.items.map(item => `
         <a class="proj-sub-item" href="${item.href}" ${item.href !== '#' ? 'target="_blank"' : ''}>
           <div class="proj-sub-img">
             ${item.img
-              ? `<img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;display:block;">`
-              : '<span>IMAGE</span>'}
+          ? `<img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;display:block;">`
+          : '<span>IMAGE</span>'}
           </div>
           <div class="proj-sub-info">
             <div class="proj-sub-name">${item.name}</div>
@@ -644,7 +656,7 @@
       const len = data.items.length;
       const cols = len === 1 ? 1 : len === 2 ? 2 : len === 3 ? 3 : 2;
       subGrid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-      
+
       const modalEl = document.getElementById('project-modal');
       const targetWidth = cols === 1 ? 325 : cols === 3 ? 795 : 560;
       modalEl.style.width = '100%';
