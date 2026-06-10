@@ -481,7 +481,8 @@ footer h2 {
 footer p {
   font-size: 0.9rem;
   opacity: 0.6;
-  text-align: right;
+  text-align: left;
+  margin-top: 40px;
 }
 
 .flower {
@@ -596,6 +597,7 @@ footer p {
   footer p {
     font-size: 0.8rem;
     text-align: left;
+    margin-top: 24px;
   }
 
 }
